@@ -1,0 +1,250 @@
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+
+ 
+background: linear-gradient(135deg, #43cea2, #185a9d);
+
+  display: flex;
+  flex-direction: column;
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+/* Glassmorphic Card */
+form {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 30px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1s ease-in-out;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Labels & Inputs */
+label {
+  display: block;
+  margin-top: 15px;
+  font-weight: 500;
+  color: #444;
+}
+
+label span.hindi {
+  font-size: 0.85em;
+  color: #777;
+  display: block;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 8px;
+  background: #f9f9f9;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+input:focus, select:focus {
+  outline: none;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 188, 212, 0.6);
+}
+
+/* Price display */
+#priceDisplay {
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+/* Slot grid */
+.slot-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.slot-btn {
+  padding: 8px 12px;
+  background: #ffffffcc;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.slot-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+}
+
+.slot-btn.active {
+  background: linear-gradient(270deg, #00bcd4, #ec407a, #ff9800);
+  color: #fff;
+  border: none;
+}
+
+/* Empty state for slots */
+.slot-empty {
+  width: 100%;
+  text-align: center;
+  background: rgba(255,255,255,0.6);
+  border: 1px dashed #bbb;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* Button */
+button {
+  margin-top: 25px;
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(270deg, #00bcd4, #ec407a, #ff9800);
+  background-size: 600% 600%;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  animation: gradientMove 6s ease infinite;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Confirmation Page */
+.confirmation {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px);
+  padding: 30px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Social icons */
+ul {
+  margin-top: 40px;
+  display: flex;
+  position: relative;
+  left: 153px;
+  transform: translate(-50%, -50%);
+}
+
+ul li { list-style: none; }
+
+ul li a {
+  width: 59px;
+  height: 59px;
+  background-color: #fff;
+  text-align: center;
+  line-height: 57px;
+  font-size: 20px;
+  margin: 0 10px;
+  display: block;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  border: 3px solid #fff;
+  z-index: 1;
+}
+
+ul li a .icon {
+  position: sticky;
+  color: #262626;
+  transition: .5s;
+  z-index: 3;
+}
+
+ul li a:hover .icon {
+  color: #fff;
+  transform: rotateY(360deg);
+}
+
+ul li a:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f00;
+  transition: .5s;
+  z-index: 2;
+}
+
+ul li a:hover:before { top: 0; }
+
+ul li:nth-child(1) a:before{ background: #3b5999; }
+ul li:nth-child(2) a:before{ background: #55acee; }
+ul li:nth-child(3) a:before { background: #0077b5; }
+ul li:nth-child(4) a:before { background: #dd4b39; }
+
+/* Responsive */
+@media (max-width: 600px) {
+  body { padding: 10px; }
+  form, .confirmation { padding: 18px; max-width: 95vw; }
+  h1 { font-size: 1.3rem; margin-bottom: 14px; }
+  ul {
+    flex-direction: column;
+    left: 50%;
+    margin-top: 20px;
+    transform: translate(-50%, 0);
+    align-items: center;
+  }
+  ul li { margin-bottom: 12px; }
+  ul li a {
+    width: 45px;
+    height: 45px;
+    font-size: 16px;
+    line-height: 43px;
+    margin: 0 0 8px 0;
+  }
+}
+
+@media (max-width: 400px) {
+  form, .confirmation { padding: 10px; border-radius: 8px; }
+  h1 { font-size: 1rem; }
+  ul li a {
+    width: 38px;
+    height: 38px;
+    font-size: 13px;
+    line-height: 36px;
+  }
+}

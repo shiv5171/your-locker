@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Locker</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  
+  <!-- Admin Login Button -->
+  <p style="text-align:center; margin-top:20px;">
+    <a href="/login"
+       class="inline-flex items-center px-5 py-2.5 
+              bg-gradient-to-r from-indigo-500 to-purple-600 
+              text-white font-semibold rounded-lg shadow-md
+              hover:from-purple-600 hover:to-indigo-500 
+              transform hover:-translate-y-0.5 hover:shadow-lg
+              transition-all duration-300 ease-in-out">
+      <i class="fas fa-user-shield mr-2"></i> User Login
+    </a>
+  </p>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <form id="bookingForm" method="POST" action="/book">
+    <h1>🚉 Your Locker</h1>
+
+    <label>City <span class="hindi">शहर</span></label>
+    <select id="city" name="city" required onchange="updateStationTypes()">
+      <option value="">Select City</option>
+      <option value="Delhi">Delhi</option>
+      <option value="Meerut">Meerut</option>
+      <option value="Lucknow">Lucknow</option>
+    </select>
+
+    <label>Station Type <span class="hindi">स्टेशन प्रकार</span></label>
+    <select id="stationType" name="stationType" required onchange="updateStations()">
+      <option value="">Select Type</option>
+      <option value="Railway">Railway Station</option>
+      <option value="Bus">Bus Station</option>
+    </select>
+
+    <label>Station <span class="hindi">स्टेशन</span></label>
+    <select id="station" name="station" required>
+      <option value="">Select Station</option>
+    </select>
+
+    <label>Day <span class="hindi">दिन</span></label>
+    <select name="day" required>
+      <option value="monday">Monday</option>
+      <option value="tuesday">Tuesday</option>
+      <option value="wednesday">Wednesday</option>
+      <option value="thursday">Thursday</option>
+      <option value="friday">Friday</option>
+      <option value="saturday">Saturday</option>
+      <option value="sunday">Sunday</option>
+    </select>
+
+    <label>Date <span class="hindi">तारीख</span></label>
+    <input type="date" name="date" required />
+
+    <label>Duration <span class="hindi">अवधि</span></label>
+    <select id="days" name="days" required>
+      <option value="1">1 Day – ₹50</option>
+      <option value="2">2 Days – ₹100</option>
+      <option value="3">3 Days – ₹150</option>
+      <option value="4">4 Days – ₹200</option>
+    </select>
+
+    <p id="priceDisplay">💰 Price: ₹50</p>
+
+    <label>Your Name <span class="hindi">आपका नाम</span></label>
+    <input type="text" name="name" required />
+
+    <label>Mobile No <span class="hindi">मोबाइल नंबर</span></label>
+    <input type="tel" name="mobile" required pattern="[0-9]{10}" />
+
+    <label>Choose Slot <span class="hindi">स्लॉट चुनें</span></label>
+    <div id="slotContainer" class="slot-grid"></div>
+    <input type="hidden" name="slot" id="slotInput" required>
+
+    <button type="submit">Book Locker</button>
+  </form>
+
+  <ul>
+    <li><a href="#"><i class="fab fa-facebook-f icon"></i></a></li>
+    <li><a href="#"><i class="fab fa-twitter icon"></i></a></li>
+    <li><a href="#"><i class="fab fa-linkedin-in icon"></i></a></li>
+    <li><a href="#"><i class="fab fa-google-plus-g icon"></i></a></li>
+  </ul>
+
+  <script>
+    const stations = {
+      Delhi: {
+        Railway: ["New Delhi", "Hazrat Nizamuddin", "Anand Vihar"],
+        Bus: ["ISBT Kashmere Gate", "ISBT Sarai Kale Khan"]
+      },
+      Meerut: {
+        Railway: ["Meerut City", "Meerut Cantt"],
+        Bus: ["ISBT Meerut", "Bhainsali Bus Stand"]
+      },
+      Lucknow: {
+        Railway: ["Charbagh", "Lucknow Junction"],
+        Bus: ["Alambagh", "Kaiserbagh"]
+      }
+    };
+
+    function updateStationTypes() {
+      document.getElementById("stationType").value = "";
+      document.getElementById("station").innerHTML = `<option value="">Select Station</option>`;
+      clearSlots();
+    }
+
+    function updateStations() {
+      const city = document.getElementById("city").value;
+      const type = document.getElementById("stationType").value;
+      const stationSelect = document.getElementById("station");
+
+      stationSelect.innerHTML = `<option value="">Select Station</option>`;
+      clearSlots();
+      if (city && type && stations[city] && stations[city][type]) {
+        stations[city][type].forEach(station => {
+          const option = document.createElement("option");
+          option.value = station;
+          option.textContent = station;
+          stationSelect.appendChild(option);
+        });
+      }
+    }
+
+    function clearSlots() {
+      document.getElementById("slotContainer").innerHTML = "";
+      document.getElementById("slotInput").value = "";
+    }
+
+    function updateSlots() {
+      const station = document.getElementById("station").value;
+      clearSlots();
+      if (!station) return;
+
+      fetch("/get_slots", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ station })
+      })
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById("slotContainer");
+        const slots = data.available_slots || [];
+        if (slots.length === 0) {
+          container.innerHTML = `<div class="slot-empty">No slots available for this station</div>`;
+          return;
+        }
+        slots.forEach(slot => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "slot-btn";
+          btn.textContent = `Slot ${slot}`;
+          btn.onclick = () => {
+            document.querySelectorAll("#slotContainer .slot-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            document.getElementById("slotInput").value = slot;
+          };
+          container.appendChild(btn);
+        });
+      })
+      .catch(() => {
+        const container = document.getElementById("slotContainer");
+        container.innerHTML = `<div class="slot-empty">Error loading slots</div>`;
+      });
+    }
+
+    document.getElementById('days').addEventListener('change', function() {
+      const days = parseInt(this.value || "1");
+      document.getElementById('priceDisplay').textContent = `💰 Price: ₹${days * 50}`;
+    });
+
+    document.getElementById("station").addEventListener("change", updateSlots);
+
+    document.getElementById("bookingForm").addEventListener("submit", function(e) {
+      const slotVal = document.getElementById("slotInput").value;
+      if (!slotVal) {
+        e.preventDefault();
+        alert("Please select a slot before booking.\nकृपया बुकिंग से पहले स्लॉट चुनें।");
+      }
+    });
+  </script>
+</body>
+</html>
