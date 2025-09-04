@@ -1,0 +1,65 @@
+[
+  {
+    "name": "shiv verma",
+    "mobile": "9264980173",
+    "city": "Delhi",
+    "station_type": "Railway",
+    "station": "Hazrat Nizamuddin",
+    "day": "friday",
+    "date": "2025-09-04",
+    "days": 2,
+    "price": 100,
+    "pin": 9273
+  },
+  {
+    "name": "shiv verma",
+    "mobile": "9264980173",
+    "city": "Meerut",
+    "station_type": "Bus",
+    "station": "ISBT Meerut",
+    "day": "wednesday",
+    "date": "2025-09-04",
+    "days": 1,
+    "price": 50,
+    "pin": 9313
+  },
+  {
+    "name": "shiv verma",
+    "mobile": "9264980173",
+    "city": "Delhi",
+    "station_type": "Railway",
+    "station": "Hazrat Nizamuddin",
+    "day": "tuesday",
+    "date": "2025-09-04",
+    "days": 2,
+    "price": 100,
+    "pin": 1016,
+    "slot": 1
+  },
+  {
+    "name": "shiv verma",
+    "mobile": "9264980173",
+    "city": "Delhi",
+    "station_type": "Bus",
+    "station": "ISBT Sarai Kale Khan",
+    "day": "tuesday",
+    "date": "2025-09-04",
+    "days": 4,
+    "price": 200,
+    "pin": 3486,
+    "slot": 9
+  },
+  {
+    "name": "shiv verma",
+    "mobile": "9264980173",
+    "city": "Delhi",
+    "station_type": "Bus",
+    "station": "ISBT Sarai Kale Khan",
+    "day": "tuesday",
+    "date": "2025-09-04",
+    "days": 4,
+    "price": 200,
+    "pin": 3892,
+    "slot": 7
+  }
+]
