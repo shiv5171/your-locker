@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Your Locker</title>
+  <link href="https://fonts.googleapis.com/css?family=Exo:700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Abel&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background-color: #dfe6e9;
+      font-family: 'Abel', sans-serif;
+    }
+
+    .title {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .title h1 {
+      font-size: 40px;
+      font-family: 'Exo', sans-serif;
+    }
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .card {
+      width: 280px;
+      min-height: 470px;
+      background: linear-gradient(rgb(225,150,58),rgb(227,144,91));
+      box-shadow: 0px 20px 60px rgba(0,0,0, 0.5);
+      border-radius: 10px;
+      text-align: center;
+      padding: 15px;
+      transition: transform 0.6s, box-shadow 0.6s;
+      transform: perspective(900px) rotateX(10deg);
+    }
+
+    .card:hover {
+      transform: perspective(900px) rotateX(0deg);
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .card img {
+      width: 200px;
+      height: auto;
+      margin-top: 10px;
+    }
+
+    .card h3 {
+      font-size: 22px;
+      color: white;
+      text-shadow: 0 0 2px white;
+      margin-top: 15px;
+    }
+
+    .card p {
+      color: white;
+      font-size: 15px;
+      line-height: 1.4;
+      margin-top: 10px;
+    }
+
+    /* Different gradients for each card */
+    .card:nth-child(2) {
+      background: linear-gradient(rgb(93,94,170),rgb(93,66,103));
+    }
+    .card:nth-child(3) {
+      background: linear-gradient(#ff5252, #b33939);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px;
+      font-family: 'Exo', sans-serif;
+      font-size: 18px;
+    }
+
+    /* Tablet adjustments */
+    @media (max-width: 768px) {
+      .title h1 {
+        font-size: 32px;
+      }
+      .card {
+        width: 45%;
+      }
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 480px) {
+      .title h1 {
+        font-size: 26px;
+      }
+      .card {
+        width: 90%;
+      }
+      .card img {
+        width: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="title">
+    <h1>
+      <span style="color: #ff9f43">About</span>
+      <span style="color: #0abde3">Your</span>
+      <span style="color: #ee5253">Locker</span>
+      <span style="color: #5f27cd">System</span>
+    </h1>
+  </div>
+
+  <div class="card-container">
+    <div class="card">
+      <img src="https://www.pngmart.com/files/11/Travel-Globe-PNG-Transparent.png" alt="">
+      <h3>🚀 Effortless Station Selection</h3>
+      <p>Choose a city, pick station type—railway or bus—and instantly see relevant options. Smart filters make booking fast and intuitive.</p>
+    </div>
+
+    <div class="card">
+      <img src="https://wallazee.global.ssl.fastly.net/images/dynamic/items/383-1024.png" alt="Eiffel Tower">
+      <h3>🎨 Modern UI with Glassmorphism</h3>
+      <p>Tailwind CSS powers a sleek, responsive layout with premium buttons and icons. Glassmorphic containers add elegance and clarity.</p>
+    </div>
+
+    <div class="card">
+      <img src="https://www.pngmart.com/files/7/Fire-Proof-Safe-PNG-Clipart.png" alt="">
+      <h3>🔐 Secure Booking with PIN</h3>
+      <p>Users receive a unique 4-digit PIN after booking. No QR needed—just simple, secure access for real-world deployment.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <h2>Crafted with ❤️ by Satyam</h2>
+  </div>
+</body>
+</html>
